@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/PngWnA/kuaaa.net/issues"
   },
-  "homepage": "https://github.com/PngWnA/kuaaa.net#readme"
+  "homepage": "https://github.com/PngWnA/kuaaa.net#readme",
+  "dependencies": {
+    "nodemon": "^2.0.3"
+  }
 }

@@ -2,9 +2,9 @@
   "name": "kuaaa.net",
   "version": "0.1.0",
   "description": "KUAAA Network Service",
-  "main": "index.js",
+  "main": "server/index.js",
   "scripts": {
-    "test": "nodemon ./src/index.js"
+    "test": "nodemon ./server/index.js"
   },
   "repository": {
     "type": "git",
@@ -14,13 +14,14 @@
     "kuaaa",
     "astronomy"
   ],
-  "author": "PngWnA (Lee GeonWoo)",
+  "author": "PngWnA",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/PngWnA/kuaaa.net/issues"
   },
   "homepage": "https://github.com/PngWnA/kuaaa.net#readme",
   "dependencies": {
+    "express": "^4.17.1",
     "nodemon": "^2.0.3"
   }
 }

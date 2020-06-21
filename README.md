@@ -2,7 +2,7 @@
 kuaaa network service
 
 ## Description
-[고려대학교 아마추어 천문회 : 쿠아]의 웹서비스 제공
+쿠아 웹서비스 제공
 
 ## Components
 ### about.kuaaa.net (Landing page)

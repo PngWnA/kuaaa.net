@@ -1,18 +1,22 @@
 {
   "name": "kuaaa.net",
-  "version": "0.1.0",
+  "version": "0.0.1",
   "description": "KUAAA Network Service",
-  "main": "server/index.js",
+  "main": "init.js",
   "scripts": {
-    "test": "nodemon ./server/index.js"
+    "test": "nodemon -g init.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/PngWnA/kuaaa.net.git"
   },
   "keywords": [
-    "kuaaa",
-    "astronomy"
+    "KUAAA",
+    "Postgres",
+    "Express",
+    "Angular",
+    "Node",
+    "Community"
   ],
   "author": "PngWnA",
   "license": "ISC",
@@ -22,6 +26,8 @@
   "homepage": "https://github.com/PngWnA/kuaaa.net#readme",
   "dependencies": {
     "express": "^4.17.1",
-    "nodemon": "^2.0.3"
+    "nodemon": "^2.0.4",
+    "passport": "^0.4.1",
+    "sequelize": "^6.3.4"
   }
 }

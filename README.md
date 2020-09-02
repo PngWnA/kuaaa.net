@@ -4,5 +4,12 @@
 ## Description
 쿠아 서비스 제공
 
-## Components
-위키 참고
+## How to run?
+
+```
+npm install
+
+npm build
+
+npm run all
+```

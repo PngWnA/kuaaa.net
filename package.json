@@ -4,8 +4,9 @@
   "description": "KUAAA Network Service",
   "main": "init.js",
   "scripts": {
-    "test": "nodemon -g src/server/init.js",
-    "build": "tsc"
+    "test": "nodemon -g build/server/init.js & ng serve",
+    "build": "cd src; cd server; tsc; cd ..; cd client; ng build;",
+    "clean": "rm -rf build/server/*; rm -rf build/client/*;"
   },
   "repository": {
     "type": "git",

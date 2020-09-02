@@ -1,5 +1,6 @@
-const hello = (res: any): void => { // 계속 타입 없다고 시위해서 잠시 any로 설정
-    res.status('../../client/index.html');
+const hello = (req:Express.Request, res: Express.Response): void => {
+    console.log(req.headers);
+    res.json({msg: 'Hello KUAAA'});
     return;
 };
 

@@ -5,8 +5,12 @@
   "description": "KUAAA Network Service",
   "main": "init.js",
   "scripts": {
-    "all": "nodemon build/server/init.js",
-    "build": "mkdir -p build; cd src; cd server; tsc; cd ..; cd client; ng build;",
+    "start": "nodemon build/server/init.js",
+    
+    "build:all": "mkdir -p build; cd src; cd server; tsc; cd ..; cd client; ng build;",
+    "build:server": "mkdir -p build; cd src; cd server; tsc;",
+    "build:client": "mkdir -p build; cd src; cd client; ng build;;",
+
     "clean": "rm -rf build/server/*; rm -rf build/client/*;"
   },
   "repository": {
@@ -33,6 +37,6 @@
     "express": "^4.17.1",
     "nodemon": "^2.0.4",
     "passport": "^0.4.1",
-    "sequelize": "^6.3.4"
+    "sequelize": "^6.3.5"
   }
 }

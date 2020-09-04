@@ -5,7 +5,7 @@
   "description": "KUAAA Network Service",
   "main": "init.js",
   "scripts": {
-    "all": "nodemon --experimental-json-modules build/server/init.js",
+    "all": "nodemon build/server/init.js",
     "build": "mkdir -p build; cd src; cd server; tsc; cd ..; cd client; ng build;",
     "clean": "rm -rf build/server/*; rm -rf build/client/*;"
   },

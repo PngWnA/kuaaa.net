@@ -1,5 +1,5 @@
 import express from 'express';
-import { hello } from './root.ctrl.js';
+import { hello } from './root.js';
 
 const { Router } = express;
 const router = Router();

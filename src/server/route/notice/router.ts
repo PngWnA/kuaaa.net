@@ -1,8 +1,9 @@
 import express from 'express';
-import { hello } from './root.js';
+import { test } from './notice.js';
 
 const { Router } = express;
 const router = Router();
-router.get('/', hello);
+
+router.get('/', test);
 
 export default router;

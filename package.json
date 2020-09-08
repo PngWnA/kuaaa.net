@@ -34,6 +34,7 @@
     "express": "^4.17.1",
     "nodemon": "^2.0.4",
     "passport": "^0.4.1",
-    "sequelize": "^6.3.5"
+    "sequelize": "^6.3.5",
+    "sqlite3": "^5.0.0"
   }
 }

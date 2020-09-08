@@ -6,11 +6,9 @@
   "main": "init.js",
   "scripts": {
     "start": "nodemon build/server/init.js",
-    
     "build:all": "mkdir -p build; cd src; cd server; tsc; cd ..; cd client; ng build;",
     "build:server": "mkdir -p build; cd src; cd server; tsc;",
     "build:client": "mkdir -p build; cd src; cd client; ng build;;",
-
     "clean": "rm -rf build/server/*; rm -rf build/client/*;"
   },
   "repository": {
@@ -33,7 +31,6 @@
   "homepage": "https://github.com/PngWnA/kuaaa.net#readme",
   "dependencies": {
     "@types/express": "^4.17.8",
-    "ejs": "^3.1.5",
     "express": "^4.17.1",
     "nodemon": "^2.0.4",
     "passport": "^0.4.1",

@@ -1,4 +1,4 @@
-const hello = (req:any, res: any): void => {
+const hello = (req, res) => {
     res.send(`GET / <br> Hello KUAAA.`);
     return;
 };

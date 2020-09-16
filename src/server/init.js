@@ -1,5 +1,5 @@
 import server from './server.js';
 
-const port: number = Number(process.env.PORT) || 31413;
+const port = Number(process.env.PORT) || 31413;
 
-server.listen(port, () : void => { console.log(`Server is running on localhost:${port}.`) });
+server.listen(port, () => { console.log(`Server is running on localhost:${port}.`) });

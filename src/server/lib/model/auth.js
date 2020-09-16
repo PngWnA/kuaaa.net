@@ -1,6 +1,6 @@
 import { Sequelize } from "sequelize/types";
 
-export default (sequelize: Sequelize, DataTypes: any) => {
+export default (sequelize, DataTypes) => {
     const Users = sequelize.define('Users', {
         uid: {
             type: DataTypes.INTEGER,

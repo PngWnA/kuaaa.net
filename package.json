@@ -9,6 +9,7 @@
     "build:all": "mkdir -p build; cd src; cd server; tsc; cd ..; cd client; ng build;",
     "build:server": "mkdir -p build; cd src; cd server; tsc;",
     "build:client": "mkdir -p build; cd src; cd client; ng build;;",
+    "test:server": ""
     "clean": "rm -rf build/server/*; rm -rf build/client/*;"
   },
   "repository": {

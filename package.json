@@ -1,7 +1,6 @@
 {
   "name": "kuaaa.net",
   "version": "0.0.1",
-  "type": "module",
   "description": "KUAAA Network Service",
   "main": "init.js",
   "scripts": {

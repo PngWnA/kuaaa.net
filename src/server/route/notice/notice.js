@@ -1,8 +1,6 @@
-import express from 'express';
-
-const test = (req: express.Request, res: express.Response): void => {
+const test = (req, res) => {
     res.send("GET /notice/");
     return;
 };
 
-export { test };
+module.exports = { test };

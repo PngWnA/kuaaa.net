@@ -1,9 +1,10 @@
-import express from 'express';
-import { test } from './board.js';
+const express = require('express');
+const { test } = require('./board');
+
 
 const { Router } = express;
 const router = Router();
 
 router.get('/login', test);
 
-export default router;
+module.exports = { router };

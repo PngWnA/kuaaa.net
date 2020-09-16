@@ -1,12 +1,12 @@
-import express from 'express';
-import { hello } from './root.js';
+const express = require('express');
+const { hello } = require('./root.js');
 
-import account from './account/router.js';
-import archive from './archive/router.js';
-import blog from './blog/router.js';
-import board from './board/router.js';
-import gall from './gall/router.js';
-import notice from './notice/router.js';
+const account = require('./account/index.js');
+const archive = require('./archive/index.js');
+const blog = require('./blog/index.js');
+const board = require('./board/index.js');
+const gall = require('./gall/index.js');
+const notice = require('./notice/index.js');
 
 const { Router } = express;
 const router = Router();
@@ -20,4 +20,4 @@ router.use('/notice', notice);
 
 router.get('/', hello);
 
-export default router;
+module.exports = { router };

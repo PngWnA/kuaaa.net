@@ -3,4 +3,4 @@ const hello = (req, res) => {
     return;
 };
 
-export { hello };
+module.exports = { hello };

@@ -1,9 +1,10 @@
-import express from 'express';
-import { test } from './notice.js';
+const express = require('express');
+const { test } = require('./notice');
+
 
 const { Router } = express;
 const router = Router();
 
 router.get('/', test);
 
-export default router;
+module.exports = { router };

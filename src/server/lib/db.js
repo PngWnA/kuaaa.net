@@ -1,6 +1,6 @@
-import fs from 'fs';
-import path from 'path';
-import { Sequelize } from "sequelize";
+const fs = require('fs');
+const path = require('path');
+const { Sequelize } = require("sequelize");
 
 const db = {};
 const sequelize = new Sequelize('sqlite::memory:');
@@ -11,4 +11,4 @@ fs.readdirSync(path.join(__dirname, `model`))
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
-export default sequelize; 
+module.exports = db;

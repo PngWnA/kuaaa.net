@@ -1,6 +1,7 @@
-import Express from 'express';
-import db from './lib/db.js';
-import router from './route/index.js';
+const Express = require('express')
+
+const db = require('./lib/db');
+const router = require('./router');
 
 const app = Express();
 app.use('/', router);
@@ -10,4 +11,4 @@ db.sequelize
 .then(() => {console.log(`DB Sync done.`)})
 .catch(() => {console.log(`WTF?`)});
 
-export default app;
+module.exports = app;

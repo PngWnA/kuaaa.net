@@ -1,9 +1,10 @@
-import express from 'express';
-import { test } from './archive.js';
+const express = require('express');
+const { test } = require('./archive');
+
 
 const { Router } = express;
 const router = Router();
 
 router.get('/', test);
 
-export default router;
+module.exports = { router };

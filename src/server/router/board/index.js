@@ -1,10 +1,10 @@
 const express = require('express');
-const { test } = require('./blog');
+const { test } = require('./board');
 
 
 const { Router } = express;
 const router = Router();
 
-router.get('/', test);
+router.get('/login', test);
 
-module.exports = { router };
+module.exports = router;

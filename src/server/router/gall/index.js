@@ -6,4 +6,4 @@ const router = Router();
 
 router.get('/', test);
 
-module.exports = { router };
+module.exports = router;

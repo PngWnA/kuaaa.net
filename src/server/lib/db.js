@@ -1,14 +1,16 @@
-const fs = require('fs');
-const path = require('path');
-const { Sequelize } = require("sequelize");
+const Sequelize = require("sequelize");
 
 const db = {};
-const sequelize = new Sequelize('sqlite::memory:');
 
-fs.readdirSync(path.join(__dirname, `model`))
-.forEach((file) => { const model = sequelize.import(path.join(__dirname, file)); db[model.name] = model; });
+const sequelize = new Sequelize('sqlite::memory:', options = {logging: (msg) => {console.log(msg)}});
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
+
+db.Users = require('./model/users')(sequelize, Sequelize.DataTypes);
+db.Auth = require('./model/auth')(sequelize, Sequelize.DataTypes);
+db.Articles = require('./model/articles')(sequelize, Sequelize.DataTypes);
+db.Comments = require('./model/comments')(sequelize, Sequelize.DataTypes);
+db.Boards = require('./model/boards')(sequelize, Sequelize.DataTypes);
 
 module.exports = db;

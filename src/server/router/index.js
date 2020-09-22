@@ -1,4 +1,5 @@
 const { Router } = require('express');
+
 const router = Router();
 
 const account = require('./account');
@@ -16,6 +17,7 @@ router.use('/gall', gall);
 router.use('/notice', notice);
 
 const { hello } = require('./root');
+
 router.get('/', hello);
 
 module.exports = router;

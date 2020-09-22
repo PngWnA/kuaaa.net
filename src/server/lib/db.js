@@ -1,8 +1,8 @@
-const Sequelize = require("sequelize");
+const Sequelize = require('sequelize');
 
 const db = {};
 
-const sequelize = new Sequelize('sqlite::memory:', options = {logging: (msg) => {console.log(msg)}});
+const sequelize = new Sequelize('sqlite::memory:');
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;

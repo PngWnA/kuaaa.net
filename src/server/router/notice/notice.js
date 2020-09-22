@@ -1,6 +1,5 @@
 const test = (req, res) => {
-    res.send("GET /notice/");
-    return;
+  res.send('GET /notice/');
 };
 
 module.exports = { test };

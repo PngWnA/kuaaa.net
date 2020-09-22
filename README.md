@@ -9,7 +9,5 @@
 ```
 npm install
 
-npm build
-
-npm run all
+npm start
 ```

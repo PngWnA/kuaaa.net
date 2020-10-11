@@ -26,7 +26,7 @@ const comparePassword = async (password, storedPassword) => {
   return Buffer.compare(hashed, digest) === 0;
 };
 
-const issueToken = async (user) => {
+const issueToken = (user) => {
   const token = jwt.sign(
     {
       uid: user.uid,
@@ -43,12 +43,11 @@ const issueToken = async (user) => {
   return token;
 };
 
-const verifyToken = async (token) => {
-  const verified = jwt.verify(token);
+const verifyToken = (token) => {
+  const verified = jwt.verify(token, jwtSecret);
   return verified;
 };
 
-generatePassword('a');
-comparePassword('b');
-issueToken('user');
-verifyToken('a');
+module.exports = {
+  generatePassword, comparePassword, issueToken, verifyToken,
+};

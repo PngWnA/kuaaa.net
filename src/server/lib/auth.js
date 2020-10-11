@@ -23,5 +23,4 @@ async function comparePassword(password, storedPassword) {
   return Buffer.compare(hashed, digest) === 0;
 }
 
-generatePassword('a');
-comparePassword('b');
+module.exports = { generatePassword, comparePassword };

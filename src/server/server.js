@@ -4,6 +4,10 @@ const db = require('./lib/db');
 const router = require('./router');
 
 const app = Express();
+
+app.use(Express.json());
+app.use(Express.urlencoded({ extended: true }));
+
 app.use('/', router);
 
 db.sequelize

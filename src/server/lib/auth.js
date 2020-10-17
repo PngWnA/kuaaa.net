@@ -1,19 +1,22 @@
 const crypto = require('crypto');
 const util = require('util');
+const jwt = require('jsonwebtoken');
 
 const pbkdf2 = util.promisify(crypto.pbkdf2);
 const randomBytes = util.promisify(crypto.randomBytes);
 const KEY_LEN = 512;
 
-async function generatePassword(password) {
+const jwtSecret = process.env.JWT_SECRET || 'DEV_TEST';
+
+const generatePassword = async (password) => {
   const ITER = 123456;
   const ALGO = 'sha512';
   const salt = await randomBytes(16);
   const digest = await pbkdf2(password, salt, ITER, KEY_LEN, ALGO);
   return `${ALGO}:${salt.toString('base64')}:${ITER}:${KEY_LEN}:${digest.toString('base64')}`;
-}
+};
 
-async function comparePassword(password, storedPassword) {
+const comparePassword = async (password, storedPassword) => {
   const [algo, encodedSalt, iterStr, keylenStr, encodedDigest] = storedPassword.split(':');
   const iter = parseInt(iterStr, 10);
   const keylen = parseInt(keylenStr, 10);
@@ -21,6 +24,30 @@ async function comparePassword(password, storedPassword) {
   const digest = Buffer.from(encodedDigest, 'base64');
   const hashed = await pbkdf2(password, salt, iter, keylen, algo);
   return Buffer.compare(hashed, digest) === 0;
-}
+};
 
-module.exports = { generatePassword, comparePassword };
+const issueToken = (user) => {
+  const token = jwt.sign(
+    {
+      uid: user.uid,
+      nickname: user.nickname,
+      level: user.level,
+    },
+    jwtSecret,
+    {
+      expiresIn: '7d',
+      issuer: 'kuaaa.net',
+      subject: 'Auth Token',
+    },
+  );
+  return token;
+};
+
+const verifyToken = (token) => {
+  const verified = jwt.verify(token, jwtSecret);
+  return verified;
+};
+
+module.exports = {
+  generatePassword, comparePassword, issueToken, verifyToken,
+};

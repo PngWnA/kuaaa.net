@@ -18,8 +18,8 @@ const register = async (req, res, next) => {
   });
 
   if (user) {
-    res.send(user.id, user.email);
-    next();
+    res.json({ id: user.id.toString(), email: user.email.toString() });
+    return next();
   }
 
   const newUser = await Users.create({
@@ -38,7 +38,7 @@ const register = async (req, res, next) => {
 
   res.send(auth.uid.toString());
 
-  next();
+  return next();
 };
 
 module.exports = { test, register };

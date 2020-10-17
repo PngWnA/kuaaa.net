@@ -9,6 +9,11 @@ const test = async (req, res, next) => {
 
 const register = async (req, res, next) => {
   const { id, pw, email } = req.body;
+
+  if (!id || !pw || !email) {
+    res.status(400).json({ id: id ? 'OK' : null, pw: pw ? 'OK' : null, email: email ? 'OK' : null });
+  }
+
   const user = await Users.findOne({
     where: {
       id,
@@ -18,7 +23,7 @@ const register = async (req, res, next) => {
   });
 
   if (user) {
-    res.json({ id: user.id.toString(), email: user.email.toString() });
+    res.status(200).json({ id: id === user.id ? 'conflict' : 'OK', email: email === user.email ? 'conflict' : 'OK' });
     return next();
   }
 
@@ -29,14 +34,14 @@ const register = async (req, res, next) => {
     email,
   });
 
-  const auth = await Auth.create({
+  await Auth.create({
     uid: newUser.uid,
     digest: await generatePassword(pw),
     isOauth2: false,
     level: 0,
   });
 
-  res.send(auth.uid.toString());
+  res.status(201).send({});
 
   return next();
 };

@@ -2,6 +2,8 @@ const crypto = require('crypto');
 const util = require('util');
 const jwt = require('jsonwebtoken');
 
+const { Expired } = require('./db');
+
 const pbkdf2 = util.promisify(crypto.pbkdf2);
 const randomBytes = util.promisify(crypto.randomBytes);
 const KEY_LEN = 512;
@@ -43,8 +45,21 @@ const issueToken = (user) => {
   return token;
 };
 
-const verifyToken = (token) => {
-  const verified = jwt.verify(token, jwtSecret);
+const verifyToken = async (req, res, next) => {
+  const { token } = req.body;
+  const expired = await Expired.findOne({
+    where: {
+      token,
+    },
+    attributes: ['token'],
+  });
+
+  if (expired) {
+    req.user = null;
+    return next();
+  }
+
+  const verified = jwt.verify(req, jwtSecret);
   return verified;
 };
 

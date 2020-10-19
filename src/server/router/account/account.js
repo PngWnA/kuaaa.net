@@ -104,16 +104,6 @@ const logout = async (req, res, next) => {
     return next();
   }
 
-  const expired = await Expired.findOne({
-    where: {
-      token,
-    },
-  });
-  if (expired) {
-    res.status(403).json({});
-    return next();
-  }
-
   await Expired.create({
     token,
   });

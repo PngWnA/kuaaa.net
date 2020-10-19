@@ -1,5 +1,7 @@
-const { Users, Auth } = require('../../lib/db');
-const { generatePassword, issueToken, comparePassword } = require('../../lib/auth');
+const { Users, Auth, Expired } = require('../../lib/db');
+const {
+  generatePassword, comparePassword, issueToken, verifyToken,
+} = require('../../lib/auth');
 
 const test = async (req, res, next) => {
   res.send('GET /account/');
@@ -89,4 +91,37 @@ const login = async (req, res, next) => {
   return next();
 };
 
-module.exports = { test, register, login };
+const logout = async (req, res, next) => {
+  const { token } = req.body;
+  if (!token) {
+    res.status(400).json({ token: token ? 'OK' : null });
+    return next();
+  }
+
+  const decoded = await verifyToken(token);
+  if (!decoded) {
+    res.status(401).json({});
+    return next();
+  }
+
+  const expired = await Expired.findOne({
+    where: {
+      token,
+    },
+  });
+  if (expired) {
+    res.status(403).json({});
+    return next();
+  }
+
+  await Expired.create({
+    token,
+  });
+
+  res.status(200).json({});
+  return next();
+};
+
+module.exports = {
+  test, register, login, logout,
+};

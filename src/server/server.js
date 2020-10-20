@@ -13,6 +13,6 @@ app.use('/', router);
 db.sequelize
   .sync()
   .then(() => { console.log('DB Sync done.'); })
-  .catch(() => { console.log('WTF?'); });
+  .catch((err) => { console.log(err); });
 
 module.exports = app;

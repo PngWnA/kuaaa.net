@@ -47,6 +47,11 @@ const issueToken = (user) => {
 
 const verifyToken = async (req, res, next) => {
   const { token } = req.body;
+  if (!token) {
+    req.user = null;
+    return next();
+  }
+
   const expired = await Expired.findOne({
     where: {
       token,
@@ -59,8 +64,9 @@ const verifyToken = async (req, res, next) => {
     return next();
   }
 
-  const verified = jwt.verify(req, jwtSecret);
-  return verified;
+  const verified = jwt.verify(token, jwtSecret);
+  req.user = verified;
+  return next();
 };
 
 module.exports = {

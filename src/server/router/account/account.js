@@ -1,3 +1,5 @@
+const { Op } = require('sequelize');
+
 const { Users, Auth, Expired } = require('../../lib/db');
 const {
   generatePassword, comparePassword, issueToken, verifyToken,
@@ -14,12 +16,15 @@ const register = async (req, res, next) => {
 
   if (!id || !pw || !email) {
     res.status(400).json({ id: id ? 'OK' : null, pw: pw ? 'OK' : null, email: email ? 'OK' : null });
+    return next();
   }
 
   const user = await Users.findOne({
     where: {
-      id,
-      email,
+      [Op.or]: [
+        { id },
+        { email },
+      ],
     },
     attributes: ['id', 'email'],
   });
@@ -44,7 +49,6 @@ const register = async (req, res, next) => {
   });
 
   res.status(201).send({});
-
   return next();
 };
 
@@ -52,6 +56,7 @@ const login = async (req, res, next) => {
   const { id, pw } = req.body;
   if (!id || !pw) {
     res.status(400).json({ id: id ? 'OK' : null, pw: pw ? 'OK' : null });
+    return next();
   }
 
   const user = await Users.findOne({
@@ -92,18 +97,12 @@ const login = async (req, res, next) => {
 };
 
 const logout = async (req, res, next) => {
+  if (!req.user) {
+    res.status(401).json({ token: null });
+    return next();
+  }
+
   const { token } = req.body;
-  if (!token) {
-    res.status(400).json({ token: token ? 'OK' : null });
-    return next();
-  }
-
-  const decoded = await verifyToken(token);
-  if (!decoded) {
-    res.status(401).json({});
-    return next();
-  }
-
   await Expired.create({
     token,
   });

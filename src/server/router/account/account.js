@@ -2,7 +2,7 @@ const { Op } = require('sequelize');
 
 const { Users, Auth, Expired } = require('../../lib/db');
 const {
-  generatePassword, comparePassword, issueToken, verifyToken,
+  generatePassword, comparePassword, issueToken,
 } = require('../../lib/auth');
 
 const test = async (req, res, next) => {

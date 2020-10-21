@@ -32,8 +32,9 @@ const issueToken = (user) => {
   const token = jwt.sign(
     {
       uid: user.uid,
-      nickname: user.nickname,
+      name: user.name,
       level: user.level,
+      nonce: crypto.randomBytes(16),
     },
     jwtSecret,
     {

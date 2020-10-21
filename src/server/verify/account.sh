@@ -1,6 +1,6 @@
 printf "[*] Verifying /account/register"
 printf "\nShould get {} :"
-curl -X POST -H "Content-Type: application/json" -d '{"id": "djawnstlr", "pw": "djawnstlr", "email":"test@test.kr"}' localhost:31413/account/register
+curl -X POST -H "Content-Type: application/json" -d '{"id": "djawnstlr", "pw": "djawnstlr", "sid": "2016323232", "name": "엄준식", "belong": "엄준식대학/엄준식학부", "email":"test@test.kr"}' localhost:31413/account/register
 
 printf "\n\nShould get 400 error: "
 curl -X POST -H "Content-Type: application/json" -d '{"id": "djawnstlr", "email":"test@test.com"}' localhost:31413/account/register

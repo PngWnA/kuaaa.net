@@ -6,10 +6,14 @@ const {
 } = require('../../lib/auth');
 
 const register = async (req, res, next) => {
-  const { id, pw, email } = req.body;
+  const {
+    id, pw, sid, belong, name, email,
+  } = req.body;
 
-  if (!id || !pw || !email) {
-    res.status(400).json({ id: id ? 'OK' : null, pw: pw ? 'OK' : null, email: email ? 'OK' : null });
+  if (!id || !pw || !sid || !belong || !name || !email) {
+    res.status(400).json({
+      id: id ? 'OK' : null, pw: pw ? 'OK' : null, sid: sid ? 'OK' : null, belong: belong ? 'OK' : null, name: name ? 'OK' : null, email: email ? 'OK' : null,
+    });
     return next();
   }
 
@@ -30,8 +34,9 @@ const register = async (req, res, next) => {
 
   const newUser = await Users.create({
     id,
-    sid: '000000000',
-    nickname: id,
+    sid,
+    belong,
+    name,
     email,
   });
 
@@ -76,7 +81,7 @@ const login = async (req, res, next) => {
       id,
       isActive: 1,
     },
-    attributes: ['uid', 'nickname'],
+    attributes: ['uid', 'name'],
   });
 
   if (!user) {
@@ -123,6 +128,27 @@ const logout = async (req, res, next) => {
   return next();
 };
 
+const findid = async (req, res, next) => {
+  const { name, email } = req.body;
+  const user = Users.findOne({
+    where: {
+      name,
+      email,
+    },
+    attributes: ['id'],
+  });
+
+  if (!user) {
+    res.status(404).json({});
+    return next();
+  }
+
+  res.status(200).json({ id: user.id });
+  return next();
+};
+
+const resetpw = async (req, res, next) => next();
+
 module.exports = {
-  register, unregister, login, logout,
+  register, unregister, login, logout, findid, resetpw,
 };

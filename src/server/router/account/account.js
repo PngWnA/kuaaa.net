@@ -5,12 +5,6 @@ const {
   generatePassword, comparePassword, issueToken,
 } = require('../../lib/auth');
 
-const test = async (req, res, next) => {
-  res.send('GET /account/');
-
-  next();
-};
-
 const register = async (req, res, next) => {
   const { id, pw, email } = req.body;
 
@@ -49,6 +43,24 @@ const register = async (req, res, next) => {
   });
 
   res.status(201).send({});
+  return next();
+};
+
+const unregister = async (req, res, next) => {
+  if (!req.user) {
+    res.status(401).json({ token: null });
+    return next();
+  }
+
+  const user = await Users.findOne({
+    where: {
+      uid: req.user.uid,
+    },
+  });
+
+  user.destroy();
+
+  res.status(200).json({});
   return next();
 };
 
@@ -91,7 +103,7 @@ const login = async (req, res, next) => {
 
   user.level = auth.level;
 
-  const jwt = await issueToken(user);
+  const jwt = issueToken(user);
   res.status(200).json({ token: jwt });
   return next();
 };
@@ -112,5 +124,5 @@ const logout = async (req, res, next) => {
 };
 
 module.exports = {
-  test, register, login, logout,
+  register, unregister, login, logout,
 };

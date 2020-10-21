@@ -36,3 +36,16 @@ curl -X POST -H "Content-Type: application/json" -d '{}' localhost:31413/account
 
 printf "\n\nShould get {token: null}: "
 curl -X POST -H "Content-Type: application/json" -d '{"token": "'$token'"}' localhost:31413/account/logout
+
+printf "\n[*] Verifying /account/unregister"
+printf "\nIssuing token...\n"
+token=$(curl -X POST -H "Content-Type: application/json" -d '{"id": "djawnstlr", "pw": "djawnstlr"}' localhost:31413/account/login | jq -r '.token')
+
+printf "\n\nShould get {token: null}: "
+curl -X POST -H "Content-Type: application/json" -d '{}' localhost:31413/account/unregister
+
+printf "\n\nShould get {}: "
+curl -X POST -H "Content-Type: application/json" -d '{"token": "'$token'"}' localhost:31413/account/unregister
+
+printf "\nShould get {} :"
+curl -X POST -H "Content-Type: application/json" -d '{"id": "djawnstlr", "pw": "djawnstlr"}' localhost:31413/account/login

@@ -1,9 +1,13 @@
-const { Op } = require('sequelize');
+const mailer = require('nodemailer');
 
+const { Op } = require('sequelize');
 const { Users, Auth, Expired } = require('../../lib/db');
 const {
   generatePassword, comparePassword, issueToken,
 } = require('../../lib/auth');
+
+/* Mailer Init. */
+
 
 const register = async (req, res, next) => {
   const {
